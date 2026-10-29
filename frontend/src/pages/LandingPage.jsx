@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom';
+import {
+  LightningIcon, TrendUpIcon, ChartIcon, TrophyIcon,
+  CheckCircleIcon, UserIcon, QuizIcon, ArrowRightIcon,
+} from '../components/Icons';
 import styles from './LandingPage.module.css';
 
 const FEATURES = [
-  { icon: '⚡', title: 'Interactive Quizzes', desc: 'Timed, multiple-choice quizzes with real-time progress tracking.' },
-  { icon: '📊', title: 'Instant Results',     desc: 'Get your score, percentage, and detailed feedback immediately.' },
-  { icon: '📈', title: 'Track Performance',   desc: 'View your history, trends, and improvement over time.' },
-  { icon: '🏆', title: 'Leaderboard',         desc: 'Compete with peers and see where you rank in real time.' },
+  { Icon: LightningIcon, title: 'Interactive Quizzes',   desc: 'Timed, multiple-choice quizzes with real-time progress tracking.' },
+  { Icon: CheckCircleIcon, title: 'Instant Results',     desc: 'Get your score, percentage, and detailed feedback immediately.' },
+  { Icon: TrendUpIcon,   title: 'Track Performance',     desc: 'View your history, trends, and improvement over time.' },
+  { Icon: TrophyIcon,    title: 'Leaderboard',           desc: 'Compete with peers and see where you rank in real time.' },
 ];
 
 const STEPS = [
-  { num: '01', title: 'Sign Up',       desc: 'Create a free student or teacher account in seconds.' },
-  { num: '02', title: 'Browse Quizzes', desc: 'Explore published quizzes across multiple categories.' },
-  { num: '03', title: 'Take the Quiz', desc: 'Answer timed questions with a clear, focused interface.' },
-  { num: '04', title: 'See Results',   desc: 'Receive instant scoring and review correct answers.' },
+  { num: '01', Icon: UserIcon,          title: 'Sign Up',        desc: 'Create a free student or teacher account in seconds.' },
+  { num: '02', Icon: QuizIcon,          title: 'Browse Quizzes', desc: 'Explore published quizzes across multiple categories.' },
+  { num: '03', Icon: CheckCircleIcon,   title: 'Take the Quiz',  desc: 'Answer timed questions with a clear, focused interface.' },
+  { num: '04', Icon: ChartIcon,         title: 'See Results',    desc: 'Receive instant scoring and review correct answers.' },
 ];
 
 export default function LandingPage() {
@@ -77,7 +81,9 @@ export default function LandingPage() {
           <div className={styles.featureGrid}>
             {FEATURES.map((f) => (
               <div key={f.title} className={styles.featureCard}>
-                <span className={styles.featureIcon} aria-hidden="true">{f.icon}</span>
+                <div className={styles.featureIconWrap}>
+                  <f.Icon size={24} color="var(--color-primary)" />
+                </div>
                 <h3 className={styles.featureTitle}>{f.title}</h3>
                 <p className={styles.featureDesc}>{f.desc}</p>
               </div>
@@ -93,7 +99,12 @@ export default function LandingPage() {
           <div className={styles.stepsGrid}>
             {STEPS.map((s) => (
               <div key={s.num} className={styles.step}>
-                <span className={styles.stepNum}>{s.num}</span>
+                <div className={styles.stepHeader}>
+                  <span className={styles.stepNum}>{s.num}</span>
+                  <div className={styles.stepIconWrap}>
+                    <s.Icon size={20} color="var(--color-primary)" />
+                  </div>
+                </div>
                 <h3 className={styles.stepTitle}>{s.title}</h3>
                 <p className={styles.stepDesc}>{s.desc}</p>
               </div>
@@ -106,7 +117,9 @@ export default function LandingPage() {
       <section className={styles.cta}>
         <h2>Ready to sprint ahead?</h2>
         <p>Join students and teachers already using MindSprint.</p>
-        <Link to="/register" className={styles.primaryBtn}>Create Free Account</Link>
+        <Link to="/register" className={styles.primaryBtn}>
+          Create Free Account <ArrowRightIcon size={16} style={{ marginLeft: 4 }} />
+        </Link>
       </section>
 
       {/* ── Footer ── */}

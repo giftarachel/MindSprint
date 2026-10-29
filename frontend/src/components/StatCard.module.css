@@ -12,13 +12,12 @@
 .label { font-size: var(--text-sm); color: var(--color-text-muted); font-weight: var(--font-medium); }
 .value { font-size: var(--text-3xl); font-weight: var(--font-bold); color: var(--color-text); }
 .sub   { font-size: var(--text-xs);  color: var(--color-text-muted); }
-.icon  {
+.iconWrap {
   width: 48px; height: 48px;
   border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
 }
-.primary .icon { background: var(--color-lavender); color: var(--color-primary); }
-.success .icon { background: var(--color-success-bg); color: var(--color-success); }
-.warning .icon { background: var(--color-warning-bg); color: var(--color-warning); }
-.error   .icon { background: var(--color-error-bg);   color: var(--color-error);   }
+.primary .iconWrap { background: var(--color-lavender); color: var(--color-primary); }
+.success .iconWrap { background: var(--color-success-bg); color: var(--color-success); }
+.warning .iconWrap { background: var(--color-warning-bg); color: var(--color-warning); }
+.error   .iconWrap { background: var(--color-error-bg);   color: var(--color-error);   }

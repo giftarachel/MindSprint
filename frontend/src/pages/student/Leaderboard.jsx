@@ -3,6 +3,7 @@ import { studentAPI, getErrorMessage } from '../../services/api';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
 import EmptyState from '../../components/EmptyState';
+import { TrophyIcon, AwardIcon, StarIcon } from '../../components/Icons';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Student.module.css';
 
@@ -22,6 +23,13 @@ export default function Leaderboard() {
   if (loading) return <LoadingSpinner />;
   if (error) return <Alert type="error" message={error} />;
 
+  const RankIcon = ({ rank }) => {
+    if (rank === 1) return <TrophyIcon size={18} color="#B45309" />;
+    if (rank === 2) return <AwardIcon  size={18} color="#6B7280" />;
+    if (rank === 3) return <StarIcon   size={18} color="#C2410C" />;
+    return <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--color-primary-dark)' }}>{rank}</span>;
+  };
+
   return (
     <div className="page-enter">
       <h1 className={styles.pageTitle}>Leaderboard</h1>
@@ -30,7 +38,7 @@ export default function Leaderboard() {
       </p>
 
       {entries.length === 0 ? (
-        <EmptyState icon="🏆" title="No rankings yet" message="No quiz attempts have been submitted. Be the first on the leaderboard!" />
+        <EmptyState icon={TrophyIcon} title="No rankings yet" message="No quiz attempts have been submitted. Be the first on the leaderboard!" />
       ) : (
         <div className={styles.section} style={{ padding: 'var(--space-4) var(--space-6)' }}>
           {entries.map((e) => {
@@ -43,7 +51,9 @@ export default function Leaderboard() {
 
             return (
               <div key={e._id} className={styles.lbRow} style={isMe ? { background: 'var(--color-lavender-light)', borderRadius: 'var(--radius-md)', paddingLeft: 8, paddingRight: 8 } : {}}>
-                <div className={`${styles.lbRank} ${rankClass}`}>{e.rank}</div>
+                <div className={`${styles.lbRank} ${rankClass}`}>
+                  <RankIcon rank={e.rank} />
+                </div>
                 <span className={styles.lbName}>
                   {e.student_name || 'Anonymous'}
                   {isMe && <span className="badge badge-primary" style={{ marginLeft: 8 }}>You</span>}

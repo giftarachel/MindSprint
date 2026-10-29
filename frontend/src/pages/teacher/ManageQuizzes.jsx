@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { teacherAPI, getErrorMessage } from '../../services/api';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
 import Modal from '../../components/Modal';
+import { PlusIcon, EditIcon, EyeIcon, ClipboardIcon, TrashIcon } from '../../components/Icons';
 import { formatDate, statusBadgeClass } from '../../utils';
 import styles from './Teacher.module.css';
 
@@ -13,7 +14,6 @@ export default function ManageQuizzes() {
   const [error, setError] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
-  const navigate = useNavigate();
 
   function load() {
     setLoading(true);
@@ -44,7 +44,11 @@ export default function ManageQuizzes() {
     <div className="page-enter">
       <div className={styles.headerRow}>
         <h1 className={styles.pageTitle} style={{ margin: 0 }}>My Quizzes</h1>
-        <Link to="/teacher/create"><button className={styles.iconBtn} style={{ background: 'var(--color-primary)', color: '#fff', borderColor: 'var(--color-primary)' }}>＋ Create Quiz</button></Link>
+        <Link to="/teacher/create">
+          <button className={styles.iconBtn} style={{ background: 'var(--color-primary)', color: '#fff', borderColor: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <PlusIcon size={14} /> Create Quiz
+          </button>
+        </Link>
       </div>
 
       {error && <Alert type="error" message={error} onClose={() => setError('')} />}
@@ -63,10 +67,18 @@ export default function ManageQuizzes() {
               </div>
               <p className="text-muted" style={{ fontSize: 'var(--text-sm)' }}>{q.duration_minutes} min · Updated {formatDate(q.updated_at)}</p>
               <div className={styles.quizActions}>
-                <Link to={`/teacher/quizzes/${q._id}`}><button className={styles.iconBtn}>Edit</button></Link>
-                <Link to={`/teacher/preview/${q._id}`}><button className={styles.iconBtn}>Preview</button></Link>
-                <Link to={`/teacher/quizzes/${q._id}/attempts`}><button className={styles.iconBtn}>Attempts</button></Link>
-                <button className={`${styles.iconBtn} ${styles.danger}`} onClick={() => setDeleteConfirm(q)}>Delete</button>
+                <Link to={`/teacher/quizzes/${q._id}`}>
+                  <button className={styles.iconBtn} style={{ display: 'flex', alignItems: 'center', gap: 4 }}><EditIcon size={13} /> Edit</button>
+                </Link>
+                <Link to={`/teacher/preview/${q._id}`}>
+                  <button className={styles.iconBtn} style={{ display: 'flex', alignItems: 'center', gap: 4 }}><EyeIcon size={13} /> Preview</button>
+                </Link>
+                <Link to={`/teacher/quizzes/${q._id}/attempts`}>
+                  <button className={styles.iconBtn} style={{ display: 'flex', alignItems: 'center', gap: 4 }}><ClipboardIcon size={13} /> Attempts</button>
+                </Link>
+                <button className={`${styles.iconBtn} ${styles.danger}`} style={{ display: 'flex', alignItems: 'center', gap: 4 }} onClick={() => setDeleteConfirm(q)}>
+                  <TrashIcon size={13} /> Delete
+                </button>
               </div>
             </div>
           ))}

@@ -1,32 +1,40 @@
-/**
- * DashboardLayout – shared sidebar + topbar layout for all three roles.
- */
 import { useState } from 'react';
 import { NavLink, useNavigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { initials } from '../utils';
+import {
+  DashboardIcon, UsersIcon, QuizIcon, CategoryIcon, ChartIcon,
+  PlusIcon, HistoryIcon, TrophyIcon, UserIcon, TeacherIcon,
+  LogoutIcon, MenuIcon,
+} from '../components/Icons';
 import styles from './DashboardLayout.module.css';
 
 const NAV_LINKS = {
   admin: [
-    { to: '/admin',            label: 'Dashboard',   icon: '▦' },
-    { to: '/admin/users',      label: 'Users',        icon: '👥' },
-    { to: '/admin/quizzes',    label: 'Quizzes',      icon: '📋' },
-    { to: '/admin/categories', label: 'Categories',   icon: '🏷️' },
-    { to: '/admin/statistics', label: 'Statistics',   icon: '📊' },
+    { to: '/admin',            label: 'Dashboard',   Icon: DashboardIcon },
+    { to: '/admin/users',      label: 'Users',        Icon: UsersIcon },
+    { to: '/admin/quizzes',    label: 'Quizzes',      Icon: QuizIcon },
+    { to: '/admin/categories', label: 'Categories',   Icon: CategoryIcon },
+    { to: '/admin/statistics', label: 'Statistics',   Icon: ChartIcon },
   ],
   teacher: [
-    { to: '/teacher',          label: 'Dashboard',   icon: '▦' },
-    { to: '/teacher/quizzes',  label: 'My Quizzes',  icon: '📋' },
-    { to: '/teacher/create',   label: 'Create Quiz', icon: '＋' },
+    { to: '/teacher',          label: 'Dashboard',   Icon: DashboardIcon },
+    { to: '/teacher/quizzes',  label: 'My Quizzes',  Icon: QuizIcon },
+    { to: '/teacher/create',   label: 'Create Quiz', Icon: PlusIcon },
   ],
   student: [
-    { to: '/student',           label: 'Dashboard',  icon: '▦' },
-    { to: '/student/quizzes',   label: 'Quizzes',    icon: '📋' },
-    { to: '/student/history',   label: 'My History', icon: '📜' },
-    { to: '/student/leaderboard', label: 'Leaderboard', icon: '🏆' },
-    { to: '/student/profile',   label: 'Profile',    icon: '👤' },
+    { to: '/student',             label: 'Dashboard',    Icon: DashboardIcon },
+    { to: '/student/quizzes',     label: 'Quizzes',      Icon: QuizIcon },
+    { to: '/student/history',     label: 'My History',   Icon: HistoryIcon },
+    { to: '/student/leaderboard', label: 'Leaderboard',  Icon: TrophyIcon },
+    { to: '/student/profile',     label: 'Profile',      Icon: UserIcon },
   ],
+};
+
+const ROLE_ICONS = {
+  admin:   TeacherIcon,
+  teacher: TeacherIcon,
+  student: UserIcon,
 };
 
 export default function DashboardLayout() {
@@ -36,6 +44,7 @@ export default function DashboardLayout() {
 
   const role = user?.role || 'student';
   const links = NAV_LINKS[role] || [];
+  const RoleIcon = ROLE_ICONS[role] || UserIcon;
 
   async function handleLogout() {
     await logout();
@@ -62,14 +71,15 @@ export default function DashboardLayout() {
               }
               onClick={() => setSidebarOpen(false)}
             >
-              <span className={styles.navIcon} aria-hidden="true">{link.icon}</span>
+              <link.Icon size={16} className={styles.navIcon} />
               {link.label}
             </NavLink>
           ))}
         </nav>
 
         <button className={styles.logoutBtn} onClick={handleLogout}>
-          <span aria-hidden="true">⎋</span> Logout
+          <LogoutIcon size={15} />
+          Logout
         </button>
       </aside>
 
@@ -82,7 +92,7 @@ export default function DashboardLayout() {
             onClick={() => setSidebarOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            ☰
+            <MenuIcon size={20} />
           </button>
           <div className={styles.topbarRight}>
             <div className={styles.avatar} title={user?.name}>

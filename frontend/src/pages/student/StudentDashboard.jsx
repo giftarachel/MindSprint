@@ -5,6 +5,7 @@ import StatCard from '../../components/StatCard';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
 import EmptyState from '../../components/EmptyState';
+import { QuizIcon, CheckCircleIcon, TrendUpIcon, ClipboardIcon, HistoryIcon, TrophyIcon } from '../../components/Icons';
 import { formatDateTime, pct } from '../../utils';
 import styles from './Student.module.css';
 
@@ -28,29 +29,29 @@ export default function StudentDashboard() {
       <h1 className={styles.pageTitle}>Student Dashboard</h1>
 
       <div className={styles.statsGrid}>
-        <StatCard label="Available Quizzes" value={data.available_quizzes_count} icon="📋" />
-        <StatCard label="Quizzes Taken" value={data.completed_attempts} icon="✅" color="success" />
-        <StatCard label="Average Score" value={`${data.average_score}%`} icon="📊" />
-        <StatCard label="Total Attempts" value={data.total_attempts} icon="📝" />
+        <StatCard label="Available Quizzes" value={data.available_quizzes_count} icon={<QuizIcon size={22} />} />
+        <StatCard label="Quizzes Taken"      value={data.completed_attempts}      icon={<CheckCircleIcon size={22} />} color="success" />
+        <StatCard label="Average Score"      value={`${data.average_score}%`}     icon={<TrendUpIcon size={22} />} />
+        <StatCard label="Total Attempts"     value={data.total_attempts}          icon={<ClipboardIcon size={22} />} />
       </div>
 
       {/* Quick links */}
       <div className={styles.statsGrid} style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))' }}>
         <Link to="/student/quizzes" style={{ textDecoration: 'none' }}>
           <div className="card" style={{ textAlign: 'center', cursor: 'pointer' }}>
-            <span style={{ fontSize: '1.75rem' }}>📋</span>
+            <QuizIcon size={32} color="var(--color-primary)" />
             <p style={{ fontWeight: 500, marginTop: 8 }}>Browse Quizzes</p>
           </div>
         </Link>
         <Link to="/student/history" style={{ textDecoration: 'none' }}>
           <div className="card" style={{ textAlign: 'center', cursor: 'pointer' }}>
-            <span style={{ fontSize: '1.75rem' }}>📜</span>
+            <HistoryIcon size={32} color="var(--color-primary)" />
             <p style={{ fontWeight: 500, marginTop: 8 }}>My History</p>
           </div>
         </Link>
         <Link to="/student/leaderboard" style={{ textDecoration: 'none' }}>
           <div className="card" style={{ textAlign: 'center', cursor: 'pointer' }}>
-            <span style={{ fontSize: '1.75rem' }}>🏆</span>
+            <TrophyIcon size={32} color="var(--color-primary)" />
             <p style={{ fontWeight: 500, marginTop: 8 }}>Leaderboard</p>
           </div>
         </Link>
@@ -60,8 +61,12 @@ export default function StudentDashboard() {
       <div className={styles.section}>
         <h2>Recent Results</h2>
         {data.recent_results.length === 0 ? (
-          <EmptyState icon="📝" title="No attempts yet" message="Take your first quiz to see results here.">
-            <Link to="/student/quizzes"><button style={{ padding: '8px 20px', background: 'var(--color-primary)', color: '#fff', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer' }}>Browse Quizzes</button></Link>
+          <EmptyState icon={ClipboardIcon} title="No attempts yet" message="Take your first quiz to see results here.">
+            <Link to="/student/quizzes">
+              <button style={{ padding: '8px 20px', background: 'var(--color-primary)', color: '#fff', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer' }}>
+                Browse Quizzes
+              </button>
+            </Link>
           </EmptyState>
         ) : (
           <div className={styles.tableWrap}>

@@ -4,6 +4,7 @@ import { studentAPI, getErrorMessage } from '../../services/api';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
 import EmptyState from '../../components/EmptyState';
+import { HistoryIcon, TrendUpIcon, ClipboardIcon } from '../../components/Icons';
 import { formatDateTime, formatDuration, pct } from '../../utils';
 import styles from './Student.module.css';
 
@@ -33,14 +34,24 @@ export default function QuizHistory() {
 
       {completed.length > 0 && (
         <div className={styles.statsGrid}>
-          <div className="card"><p className="text-muted" style={{ fontSize: 'var(--text-sm)' }}>Total Attempts</p><p style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>{completed.length}</p></div>
-          <div className="card"><p className="text-muted" style={{ fontSize: 'var(--text-sm)' }}>Average Score</p><p style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>{avgPct}%</p></div>
+          <div className="card">
+            <p className="text-muted" style={{ fontSize: 'var(--text-sm)' }}>Total Attempts</p>
+            <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>{completed.length}</p>
+          </div>
+          <div className="card">
+            <p className="text-muted" style={{ fontSize: 'var(--text-sm)' }}>Average Score</p>
+            <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>{avgPct}%</p>
+          </div>
         </div>
       )}
 
       {attempts.length === 0 ? (
-        <EmptyState icon="📜" title="No quiz history yet" message="You haven't attempted any quizzes. Browse available quizzes to get started!">
-          <Link to="/student/quizzes"><button style={{ padding: '8px 20px', background: 'var(--color-primary)', color: '#fff', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer' }}>Browse Quizzes</button></Link>
+        <EmptyState icon={HistoryIcon} title="No quiz history yet" message="You haven't attempted any quizzes. Browse available quizzes to get started!">
+          <Link to="/student/quizzes">
+            <button style={{ padding: '8px 20px', background: 'var(--color-primary)', color: '#fff', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer' }}>
+              Browse Quizzes
+            </button>
+          </Link>
         </EmptyState>
       ) : (
         <div className={styles.section}>

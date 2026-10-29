@@ -122,14 +122,25 @@
   padding: 28px 24px; border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
 }
-.featureIcon { font-size: 2rem; display: block; margin-bottom: 12px; }
+.featureIconWrap {
+  width: 48px; height: 48px;
+  background: var(--color-lavender); border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
 .featureTitle { font-size: var(--text-lg); font-weight: var(--font-semibold); margin-bottom: 8px; }
 .featureDesc  { color: var(--color-text-muted); line-height: 1.6; }
 
 /* Steps */
 .stepsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
 .step { display: flex; flex-direction: column; gap: 8px; }
-.stepNum { font-size: 2rem; font-weight: var(--font-bold); color: var(--color-primary); opacity: 0.4; }
+.stepHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.stepNum { font-size: 1.5rem; font-weight: var(--font-bold); color: var(--color-primary); opacity: 0.5; line-height: 1; }
+.stepIconWrap {
+  width: 36px; height: 36px;
+  background: var(--color-lavender); border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+}
 .stepTitle { font-size: var(--text-lg); font-weight: var(--font-semibold); }
 .stepDesc  { color: var(--color-text-muted); line-height: 1.6; }
 

@@ -4,6 +4,7 @@ import { studentAPI, categoriesAPI, getErrorMessage } from '../../services/api';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
 import EmptyState from '../../components/EmptyState';
+import { QuizIcon, CheckCircleIcon, SearchIcon, ArrowRightIcon } from '../../components/Icons';
 import styles from './Student.module.css';
 
 export default function AvailableQuizzes() {
@@ -28,7 +29,7 @@ export default function AvailableQuizzes() {
   useEffect(() => {
     categoriesAPI.list().then((r) => setCategories(r.data.data)).catch(() => {});
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filtered = quizzes.filter((q) => {
@@ -44,23 +45,33 @@ export default function AvailableQuizzes() {
       {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
       <div className={styles.filterRow}>
-        <input
-          type="text"
-          placeholder="Search quizzes…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+          <SearchIcon size={16} style={{ position: 'absolute', left: 10, color: 'var(--color-text-muted)', pointerEvents: 'none' }} />
+          <input
+            type="text"
+            placeholder="Search quizzes…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{ paddingLeft: 34 }}
+          />
+        </div>
         <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
           <option value="">All categories</option>
           {categories.map((c) => <option key={c._id} value={c._id}>{c.name}</option>)}
         </select>
-        <button className="badge badge-primary" style={{ padding: '8px 16px', border: 'none', cursor: 'pointer' }} onClick={load}>Search</button>
+        <button
+          className="badge badge-primary"
+          style={{ padding: '8px 16px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
+          onClick={load}
+        >
+          <SearchIcon size={13} /> Search
+        </button>
       </div>
 
       {loading ? (
         <LoadingSpinner />
       ) : filtered.length === 0 ? (
-        <EmptyState icon="📋" title="No quizzes available" message="There are no published quizzes matching your filters right now. Check back later!" />
+        <EmptyState icon={QuizIcon} title="No quizzes available" message="There are no published quizzes matching your filters right now. Check back later!" />
       ) : (
         <div className={styles.quizGrid}>
           {filtered.map((q) => (
@@ -74,14 +85,18 @@ export default function AvailableQuizzes() {
               </div>
               <div style={{ marginTop: 'auto', paddingTop: 12 }}>
                 {q.already_attempted ? (
-                  <span className="badge badge-success">✓ Completed</span>
+                  <span className="badge badge-success" style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    <CheckCircleIcon size={13} /> Completed
+                  </span>
                 ) : q.attempt_in_progress ? (
                   <Link to={`/student/quizzes/${q._id}`}>
                     <button className="badge badge-warning" style={{ border: 'none', cursor: 'pointer', padding: '8px 16px' }}>Resume</button>
                   </Link>
                 ) : (
                   <Link to={`/student/quizzes/${q._id}`}>
-                    <button style={{ padding: '8px 20px', background: 'var(--color-primary)', color: '#fff', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 500 }}>Start Quiz</button>
+                    <button style={{ padding: '8px 20px', background: 'var(--color-primary)', color: '#fff', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      Start Quiz <ArrowRightIcon size={14} />
+                    </button>
                   </Link>
                 )}
               </div>

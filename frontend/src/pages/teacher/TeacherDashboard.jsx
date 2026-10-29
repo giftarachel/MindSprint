@@ -4,6 +4,7 @@ import { teacherAPI, getErrorMessage } from '../../services/api';
 import StatCard from '../../components/StatCard';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
+import { QuizIcon, CheckCircleIcon, EditIcon, ClipboardIcon, PlusIcon } from '../../components/Icons';
 import { formatDate, statusBadgeClass } from '../../utils';
 import styles from './Teacher.module.css';
 
@@ -27,15 +28,17 @@ export default function TeacherDashboard() {
       <div className={styles.headerRow}>
         <h1 className={styles.pageTitle} style={{ margin: 0 }}>Teacher Dashboard</h1>
         <Link to="/teacher/create" style={{ textDecoration: 'none' }}>
-          <span className="badge badge-primary" style={{ fontSize: 'var(--text-sm)', padding: '8px 16px' }}>＋ Create Quiz</span>
+          <span className="badge badge-primary" style={{ fontSize: 'var(--text-sm)', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <PlusIcon size={14} /> Create Quiz
+          </span>
         </Link>
       </div>
 
       <div className={styles.statsGrid}>
-        <StatCard label="Total Quizzes" value={data.total_quizzes} icon="📋" />
-        <StatCard label="Published" value={data.published_quizzes} icon="✅" color="success" />
-        <StatCard label="Drafts" value={data.draft_quizzes} icon="✏️" color="warning" />
-        <StatCard label="Total Attempts" value={data.total_attempts} icon="📝" />
+        <StatCard label="Total Quizzes"  value={data.total_quizzes}     icon={<QuizIcon size={22} />} />
+        <StatCard label="Published"      value={data.published_quizzes} icon={<CheckCircleIcon size={22} />} color="success" />
+        <StatCard label="Drafts"         value={data.draft_quizzes}     icon={<EditIcon size={22} />} color="warning" />
+        <StatCard label="Total Attempts" value={data.total_attempts}    icon={<ClipboardIcon size={22} />} />
       </div>
 
       <div className={styles.section}>
@@ -58,7 +61,9 @@ export default function TeacherDashboard() {
                 <span className="text-muted" style={{ fontSize: 'var(--text-xs)' }}>Updated {formatDate(q.updated_at)}</span>
                 <div className={styles.quizActions}>
                   <Link to={`/teacher/quizzes/${q._id}`}>
-                    <button className={styles.iconBtn}>Edit</button>
+                    <button className={styles.iconBtn} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <EditIcon size={13} /> Edit
+                    </button>
                   </Link>
                 </div>
               </div>

@@ -4,8 +4,11 @@ import { adminAPI, getErrorMessage } from '../../services/api';
 import StatCard from '../../components/StatCard';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
+import {
+  UsersIcon, StudentIcon, TeacherIcon, QuizIcon, CheckCircleIcon,
+  ClipboardIcon, UsersIcon as UsersIcon2, CategoryIcon, ChartIcon,
+} from '../../components/Icons';
 import { formatDateTime, pct } from '../../utils';
-import { statusBadgeClass } from '../../utils';
 import styles from './Admin.module.css';
 
 export default function AdminDashboard() {
@@ -28,12 +31,12 @@ export default function AdminDashboard() {
       <h1 className={styles.pageTitle}>Admin Dashboard</h1>
 
       <div className={styles.statsGrid}>
-        <StatCard label="Total Users"    value={data.total_users}    icon="👥" />
-        <StatCard label="Students"       value={data.total_students} icon="🎓" color="success" />
-        <StatCard label="Teachers"       value={data.total_teachers} icon="👩‍🏫" color="warning" />
-        <StatCard label="Total Quizzes"  value={data.total_quizzes}  icon="📋" color="primary" />
-        <StatCard label="Published"      value={data.published_quizzes} icon="✅" color="success" />
-        <StatCard label="Total Attempts" value={data.total_attempts} icon="📝" />
+        <StatCard label="Total Users"    value={data.total_users}       icon={<UsersIcon size={22} />} />
+        <StatCard label="Students"       value={data.total_students}    icon={<StudentIcon size={22} />} color="success" />
+        <StatCard label="Teachers"       value={data.total_teachers}    icon={<TeacherIcon size={22} />} color="warning" />
+        <StatCard label="Total Quizzes"  value={data.total_quizzes}     icon={<QuizIcon size={22} />} color="primary" />
+        <StatCard label="Published"      value={data.published_quizzes} icon={<CheckCircleIcon size={22} />} color="success" />
+        <StatCard label="Total Attempts" value={data.total_attempts}    icon={<ClipboardIcon size={22} />} />
       </div>
 
       <div className={styles.recentSection}>
@@ -47,12 +50,7 @@ export default function AdminDashboard() {
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>Quiz</th>
-                  <th>Score</th>
-                  <th>Date</th>
-                </tr>
+                <tr><th>Student</th><th>Quiz</th><th>Score</th><th>Date</th></tr>
               </thead>
               <tbody>
                 {data.recent_attempts.map((a) => (
@@ -71,16 +69,16 @@ export default function AdminDashboard() {
 
       <div className={styles.quickLinks}>
         <Link to="/admin/users"      className={styles.quickCard}>
-          <span>👥</span><span>Manage Users</span>
+          <UsersIcon size={28} color="var(--color-primary)" /><span>Manage Users</span>
         </Link>
         <Link to="/admin/quizzes"    className={styles.quickCard}>
-          <span>📋</span><span>Manage Quizzes</span>
+          <QuizIcon size={28} color="var(--color-primary)" /><span>Manage Quizzes</span>
         </Link>
         <Link to="/admin/categories" className={styles.quickCard}>
-          <span>🏷️</span><span>Categories</span>
+          <CategoryIcon size={28} color="var(--color-primary)" /><span>Categories</span>
         </Link>
         <Link to="/admin/statistics" className={styles.quickCard}>
-          <span>📊</span><span>Statistics</span>
+          <ChartIcon size={28} color="var(--color-primary)" /><span>Statistics</span>
         </Link>
       </div>
     </div>
