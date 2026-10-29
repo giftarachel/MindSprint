@@ -1,0 +1,17 @@
+.page {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px; padding: 24px; text-align: center;
+  background: var(--color-bg);
+}
+.code  { font-size: 6rem; font-weight: var(--font-bold); color: var(--color-lavender); line-height: 1; }
+.title { font-size: var(--text-2xl); }
+.message { color: var(--color-text-muted); }
+.link {
+  margin-top: 8px;
+  padding: 10px 24px;
+  background: var(--color-primary); color: #fff;
+  border-radius: var(--radius-md); font-weight: var(--font-medium);
+  text-decoration: none;
+}
+.link:hover { background: var(--color-primary-dark); text-decoration: none; }

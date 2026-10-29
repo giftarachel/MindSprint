@@ -1,0 +1,88 @@
+/* ============================================================
+   MindSprint Design System – CSS Variables
+   ============================================================ */
+
+:root {
+  /* Brand Colors */
+  --color-primary:        #6C4AB6;
+  --color-primary-dark:   #40266F;
+  --color-primary-light:  #8B6DD1;
+  --color-lavender:       #E9DFFF;
+  --color-lavender-light: #F4F0FF;
+
+  /* Background */
+  --color-bg:             #FAF8FF;
+  --color-surface:        #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+
+  /* Text */
+  --color-text:           #282238;
+  --color-text-muted:     #777187;
+  --color-text-inverse:   #FFFFFF;
+
+  /* Semantic */
+  --color-success:        #27865C;
+  --color-success-bg:     #EDFAF5;
+  --color-error:          #C83D55;
+  --color-error-bg:       #FFF0F2;
+  --color-warning:        #B86C00;
+  --color-warning-bg:     #FFF8EC;
+  --color-info:           #2B6CB0;
+  --color-info-bg:        #EBF4FF;
+
+  /* Border */
+  --color-border:         #E2D9F3;
+  --color-border-focus:   #6C4AB6;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(108, 74, 182, 0.08);
+  --shadow-md:   0 4px 12px rgba(108, 74, 182, 0.12);
+  --shadow-lg:   0 8px 24px rgba(108, 74, 182, 0.16);
+
+  /* Radius */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* Spacing (8-point grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+
+  --font-normal:   400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+
+  /* Layout */
+  --sidebar-width:       240px;
+  --topbar-height:       64px;
+  --content-max-width:   1200px;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+}

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+pip-log.txt
+
+# Environment variables
+.env
+*.env
+!.env.example
+
+# Node / Frontend
+node_modules/
+dist/
+.vite/
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
